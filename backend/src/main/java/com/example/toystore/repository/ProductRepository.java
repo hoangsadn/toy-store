@@ -1,7 +1,6 @@
 package com.example.toystore.repository;
 
 import com.example.toystore.dto.Product;
-import com.example.toystore.dto.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
