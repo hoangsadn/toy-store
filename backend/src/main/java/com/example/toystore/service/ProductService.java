@@ -9,11 +9,13 @@ import com.example.toystore.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+
 public class ProductService {
 
     @Autowired
@@ -24,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private SourceRepository sourceRepository;
+
+    @Autowired
+    private QRService qrService;
 
     public int insertProduct(Product product){
         return productRepository.insertProduct(product);
@@ -112,5 +117,15 @@ public class ProductService {
 
     public boolean deleteProductType(int id) {
         return productTypeRepository.deleteProductType(id);
+    }
+
+    public Boolean genQRCode() {
+        try {
+             qrService.createQR("https://www.google.com");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return null;
     }
 }

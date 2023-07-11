@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 @RestController
@@ -62,6 +63,16 @@ public class ProductController {
                 .code(200)
                 .message("Success")
                 .data(res)
+                .build();
+    }
+
+    @GetMapping("/QR")
+    public Response<Boolean> getQR() throws Exception {
+        var res = productService.genQRCode();
+        return Response.<Boolean>builder()
+                .code(200)
+                .message("Success")
+                .data(true)
                 .build();
     }
 }
