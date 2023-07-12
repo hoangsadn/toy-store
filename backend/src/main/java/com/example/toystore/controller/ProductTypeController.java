@@ -1,5 +1,6 @@
 package com.example.toystore.controller;
 
+import com.example.toystore.dto.Product;
 import com.example.toystore.dto.ProductType;
 import com.example.toystore.dto.Response;
 import com.example.toystore.service.ProductService;

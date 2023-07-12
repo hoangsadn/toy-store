@@ -29,7 +29,7 @@ public class QRService {
     final static int row = 10;
     final static int col = 7;
 
-    final static int SPACE = 20;
+    final static int SPACE = 30;
 
     public void createQR(List<Product> products) throws Exception {
 
@@ -76,7 +76,7 @@ public class QRService {
             g2d.drawImage(qrCode, posX , posY, null);
 
             var text = product.getId() + " " + product.getName();
-            g2d.drawString(text, posX , posY + QR_HEIGHT + 5);
+            g2d.drawString(text, posX , posY + QR_HEIGHT);
             g2d.drawString(Integer.toString(product.getPrice()), posX , posY + QR_HEIGHT + SPACE);
 
             if (i == products.size() - 1) {

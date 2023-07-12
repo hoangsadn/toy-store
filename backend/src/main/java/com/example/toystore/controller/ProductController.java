@@ -75,4 +75,15 @@ public class ProductController {
                 .data(true)
                 .build();
     }
+
+
+    @GetMapping("/search")
+    public Response<List<Product>> searchProduct(@RequestParam String keyword) {
+        var res = productService.searchProduct(keyword);
+        return Response.<List<Product>>builder()
+                .code(200)
+                .message("Success")
+                .data(res)
+                .build();
+    }
 }

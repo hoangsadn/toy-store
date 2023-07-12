@@ -132,4 +132,9 @@ public class ProductService {
         }
         return null;
     }
+
+    public List<Product> searchProduct(String keyword) {
+        var products = productRepository.searchProduct(keyword);
+        return fillInto(products);
+    }
 }

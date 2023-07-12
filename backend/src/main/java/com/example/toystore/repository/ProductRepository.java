@@ -97,4 +97,18 @@ public class ProductRepository {
                     .getResult() == 1;
         }
     }
+
+    public List<Product> searchProduct(String keyword) {
+        try (Connection con = dataSource.open()) {
+            String stmt =
+                    """
+                            SELECT p.id , p.name , p.qty , p.thumbnail , p.image, p.price , p.created  , p.updated, p.status, p.note, p.typeId, p.sourceId
+                            FROM products p
+                            WHERE ( p.name LIKE :keyword ) OR ( p.id LIKE :keyword )
+                    """;
+            return con.createQuery(stmt)
+                    .addParameter("keyword", "%" + keyword + "%")
+                    .executeAndFetch(Product.class);
+        }
+    }
 }
