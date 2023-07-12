@@ -66,9 +66,9 @@ public class ProductController {
                 .build();
     }
 
-    @GetMapping("/QR")
-    public Response<Boolean> getQR() throws Exception {
-        var res = productService.genQRCode();
+    @GetMapping("/qr")
+    public Response<Boolean> getQR(@RequestBody List<Integer> ids){
+        productService.genQRCode(ids);
         return Response.<Boolean>builder()
                 .code(200)
                 .message("Success")

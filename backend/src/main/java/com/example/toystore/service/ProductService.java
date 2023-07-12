@@ -6,16 +6,16 @@ import com.example.toystore.dto.Source;
 import com.example.toystore.repository.ProductRepository;
 import com.example.toystore.repository.ProductTypeRepository;
 import com.example.toystore.repository.SourceRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-
+@Slf4j
 public class ProductService {
 
     @Autowired
@@ -59,6 +59,10 @@ public class ProductService {
     public Product getProductById(int id) {
         var products =  productRepository.getProductById(id);
         return fillInto(products);
+    }
+
+    public List<Product> getProductsByIds(List<Integer> ids){
+        return productRepository.getProductByListIds(ids);
     }
 
     public ProductType getProductTypeById(int id) {
@@ -119,12 +123,12 @@ public class ProductService {
         return productTypeRepository.deleteProductType(id);
     }
 
-    public Boolean genQRCode() {
+    public Boolean genQRCode(List<Integer> productIds) {
         try {
-             qrService.createQR("https://www.google.com");
+            var products = getProductsByIds(productIds);
+            qrService.createQR(products);
         } catch (Exception e) {
-            e.printStackTrace();
-
+            log.info(String.valueOf(e));
         }
         return null;
     }

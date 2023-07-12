@@ -55,6 +55,20 @@ public class ProductRepository {
         }
     }
 
+    public List<Product> getProductByListIds(List<Integer> ids){
+        try (Connection con = dataSource.open()) {
+            String stmt =
+                    """
+                            SELECT p.id , p.name , p.qty , p.thumbnail , p.image, p.price , p.created  , p.updated, p.status, p.note, p.typeId, p.sourceId
+                            FROM products p
+                            WHERE p.id IN (:ids)
+                    """;
+            return con.createQuery(stmt)
+                    .addParameter("ids", ids)
+                    .executeAndFetch(Product.class);
+        }
+    }
+
     public boolean updateProduct(Product product) {
         try (Connection con = dataSource.open()) {
             String stmt =
